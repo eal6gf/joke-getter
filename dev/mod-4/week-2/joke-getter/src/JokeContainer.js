@@ -4,7 +4,7 @@ import JokeList from './JokeList';
 class JokeContainer extends React.Component {
   constructor(){
     super()
-    const addJoke = this.addJoke.bind(this)
+    this.addJoke = this.addJoke.bind(this)
     this.state = {
       jokes: []
     }
@@ -19,12 +19,13 @@ class JokeContainer extends React.Component {
     )
   }
 
-  handleFetchJoke(){
+  handleFetchJoke = () => {
     fetch('https://08ad1pao69.execute-api.us-east-1.amazonaws.com/dev/random_joke'
-  ).then(response => response.json()).then(json => JokeContainer.addJoke(json))
+  ).then(response => response.json())
+  .then(json => console.log(this))
   }
 
-  static addJoke = (json) => {
+  addJoke = (json) => {
     let prevJokes = this.state.jokes
     this.setState(
       {
